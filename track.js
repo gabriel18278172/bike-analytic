@@ -7,15 +7,17 @@ let stats = {
   "tip-5": 0
 };
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   const event = req.query.event;
 
-  if (event && stats[event] !== undefined) {
-    stats[event]++;
+  if (event) {
+    if (stats[event] !== undefined) {
+      stats[event]++;
+    }
+
+    return res.status(200).json({ success: true });
   }
 
-  res.status(200).json({
-    success: true,
-    stats
-  });
+  // If no event → return stats (admin view)
+  res.status(200).json(stats);
 }
