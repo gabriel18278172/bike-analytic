@@ -18,6 +18,6 @@ export default function handler(req, res) {
     return res.status(200).json({ success: true });
   }
 
-  // If no event → return stats (admin view)
+  // 👇 If no event, show stats
   res.status(200).json(stats);
 }
